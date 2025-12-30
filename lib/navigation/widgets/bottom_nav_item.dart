@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myghm_mobile/core/design_system/themes/dimension.dart';
+import 'package:myghm_mobile/core/design_system/themes/pallet.dart';
 
 class BottomNavItem extends StatefulWidget {
   final IconData icon;
@@ -60,17 +61,15 @@ class _BottomNavItemState extends State<BottomNavItem> {
             children: [
               Icon(
                 widget.icon,
-                color: widget.isActive ? const Color(0xFFF2B705) : Colors.black,
-                size: Dimension.style28,
+                color: widget.isActive ? Pallet.primary : Colors.black,
+                size: Dimension.radius30,
               ),
               SizedBox(height: Dimension.height4),
               Text(
                 widget.label,
                 style: TextStyle(
-                  fontSize: Dimension.radius12,
-                  color: widget.isActive
-                      ? const Color(0xFFF2B705)
-                      : Colors.black,
+                  fontSize: Dimension.style12,
+                  color: widget.isActive ? Pallet.primary : Colors.black,
                 ),
               ),
             ],

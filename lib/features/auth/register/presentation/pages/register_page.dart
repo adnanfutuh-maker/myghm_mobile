@@ -26,7 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
           SafeArea(
             child: Column(
               children: [
-                SizedBox(height: 40.h),
+                SizedBox(height: Dimension.height40),
                 Center(
                   child: Image.asset(
                     'assets/icon/icon.png',
@@ -62,15 +62,17 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: 12),
+                    SizedBox(height: Dimension.height12),
 
                     Center(
                       child: Container(
-                        width: 48,
-                        height: 5,
+                        width: Dimension.width48,
+                        height: Dimension.height5,
                         decoration: BoxDecoration(
                           color: Colors.grey.shade400,
-                          borderRadius: BorderRadius.circular(3),
+                          borderRadius: BorderRadius.circular(
+                            Dimension.radius3,
+                          ),
                         ),
                       ),
                     ),
@@ -95,7 +97,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
                             SizedBox(height: Dimension.height32),
 
-                            // ================= NIP =================
                             TextField(
                               decoration: InputDecoration(
                                 labelText: "NIP",
@@ -116,7 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     Dimension.radius16,
                                   ),
                                   borderSide: BorderSide(
-                                    color: const Color(0xFFF2B705),
+                                    color: Pallet.primary,
                                     width: 1.5.w,
                                   ),
                                 ),
@@ -145,7 +146,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     Dimension.radius16,
                                   ),
                                   borderSide: BorderSide(
-                                    color: const Color(0xFFF2B705),
+                                    color: Pallet.primary,
                                     width: 1.5.w,
                                   ),
                                 ),
@@ -174,7 +175,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     Dimension.radius16,
                                   ),
                                   borderSide: BorderSide(
-                                    color: const Color(0xFFF2B705),
+                                    color: Pallet.primary,
                                     width: 1.5.w,
                                   ),
                                 ),
@@ -204,7 +205,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     Dimension.radius16,
                                   ),
                                   borderSide: BorderSide(
-                                    color: const Color(0xFFF2B705),
+                                    color: Pallet.primary,
                                     width: 1.5.w,
                                   ),
                                 ),
@@ -213,7 +214,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     _isPasswordHidden
                                         ? Icons.visibility_off
                                         : Icons.visibility,
-                                    size: Dimension.style24,
+                                    size: Dimension.radius24,
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -247,7 +248,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     Dimension.radius16,
                                   ),
                                   borderSide: BorderSide(
-                                    color: const Color(0xFFF2B705),
+                                    color: Pallet.primary,
                                     width: 1.5.w,
                                   ),
                                 ),
@@ -256,7 +257,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     _isRePasswordHidden
                                         ? Icons.visibility_off
                                         : Icons.visibility,
-                                    size: Dimension.style24,
+                                    size: Dimension.radius24,
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -268,7 +269,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ),
 
-                            SizedBox(height: Dimension.height32),
+                            SizedBox(height: 32),
 
                             SizedBox(
                               height: Dimension.height48,
@@ -277,7 +278,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   context.go("/login");
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFFF2B705),
+                                  backgroundColor: Pallet.primary,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(
                                       Dimension.radius12,
@@ -287,14 +288,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                 child: Text(
                                   "Register",
                                   style: TextStyle(
-                                    fontSize: Dimension.style16,
+                                    fontSize: 16,
                                     color: Colors.white,
                                   ),
                                 ),
                               ),
                             ),
 
-                            SizedBox(height: 16),
+                            SizedBox(height: Dimension.height16),
                           ],
                         ),
                       ),

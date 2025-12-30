@@ -29,7 +29,7 @@ class CustomDialog {
               CircleAvatar(
                 backgroundColor: color.withValues(alpha: 0.2),
                 radius: Dimension.radius30,
-                child: Icon(icon, size: Dimension.style36, color: color),
+                child: Icon(icon, size: Dimension.radius36, color: color),
               ),
               SizedBox(height: Dimension.height16),
               Text(
@@ -41,7 +41,7 @@ class CustomDialog {
               Text(
                 content,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: Dimension.style16,
                   fontWeight: FontWeight.w400,
                   color: Colors.black54,
                 ),
@@ -63,7 +63,7 @@ class CustomDialog {
                 child: Text(
                   buttonText,
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: Dimension.style16,
                     fontWeight: FontWeight.w400,
                     color: Colors.white,
                   ),

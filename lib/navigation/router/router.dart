@@ -1,14 +1,14 @@
 import 'package:go_router/go_router.dart';
-import 'package:myghm_mobile/wishlist_page.dart';
+import 'package:myghm_mobile/form_page.dart';
 
+import '../../features/profile/presentation/pages/profile_page.dart';
 import '../shell/app_navigation_shell.dart';
 import '../../data_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
 import '../../home_page.dart';
 import '../../features/auth/login/presentation/pages/login_page.dart';
-import '../../profile_page.dart';
 import '../../features/auth/register/presentation/pages/register_page.dart';
-import '../../salary_slip_page.dart';
+import '../../features/salary_slip/presentation/pages/salary_slip_page.dart';
 
 class RoutesConfig {
   static final appRouter = GoRouter(
@@ -38,7 +38,7 @@ class RoutesConfig {
             routes: [
               GoRoute(
                 path: '/wishlist',
-                builder: (context, state) => const WishlistPage(),
+                builder: (context, state) => const FormPage(),
               ),
             ],
           ),

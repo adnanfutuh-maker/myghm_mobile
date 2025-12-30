@@ -66,6 +66,7 @@ class Dimension {
   static double height99 = 99.h;
   static double height100 = 100.h;
   static double height110 = 110.h;
+  static double height130 = 130.h;
   static double height139 = 139.h;
   static double height149 = 149.h;
   static double height150 = 150.h;
@@ -114,6 +115,7 @@ class Dimension {
   static double width13 = 13.w;
   static double width14 = 14.w;
   static double width15 = 15.w;
+  static double width16 = 16.w;
   static double width17 = 17.w;
   static double width20 = 20.w;
   static double width22 = 22.w;
@@ -123,6 +125,7 @@ class Dimension {
   static double width30 = 30.w;
   static double width34 = 34.w;
   static double width40 = 40.w;
+  static double width44 = 44.w;
   static double width48 = 48.w;
   static double width50 = 50.w;
   static double width60 = 60.w;
@@ -178,11 +181,14 @@ class Dimension {
   static double radius8 = 8.r;
   static double radius10 = 10.r;
   static double radius12 = 12.r;
+  static double radius14 = 14.r;
   static double radius16 = 16.r;
   static double radius24 = 24.r;
   static double radius25 = 25.r;
   static double radius26 = 26.r;
   static double radius20 = 20.r;
+  static double radius28 = 28.r;
   static double radius30 = 30.r;
   static double radius32 = 32.r;
+  static double radius36 = 36.r;
 }

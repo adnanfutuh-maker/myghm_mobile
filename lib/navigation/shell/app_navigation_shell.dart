@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myghm_mobile/core/design_system/themes/dimension.dart';
+import 'package:myghm_mobile/core/design_system/themes/pallet.dart';
 import 'package:myghm_mobile/navigation/widgets/bottom_nav_item.dart';
 
 class AppNavigationShell extends StatelessWidget {
@@ -23,9 +24,13 @@ class AppNavigationShell extends StatelessWidget {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () => _go(0),
-        backgroundColor: Color(0xFFF2B705),
+        backgroundColor: Pallet.primary,
         elevation: 4,
-        child: Icon(Icons.home, size: Dimension.style28, color: Colors.black),
+        child: Icon(
+          Icons.fingerprint,
+          size: Dimension.radius30,
+          color: Colors.black,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
@@ -49,8 +54,8 @@ class AppNavigationShell extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               BottomNavItem(
-                icon: Icons.favorite,
-                label: 'Wishlist',
+                icon: Icons.description,
+                label: 'Form',
                 isActive: navigationShell.currentIndex == 1,
                 onTap: () => _go(1),
               ),

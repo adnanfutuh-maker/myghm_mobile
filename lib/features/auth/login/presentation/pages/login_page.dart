@@ -15,7 +15,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _isPasswordHidden = true;
-  bool _rememberMe = false;
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                               Dimension.radius16,
                             ),
                             borderSide: BorderSide(
-                              color: Color(0xFFF2B705),
+                              color: Pallet.primary,
                               width: 1.5.w,
                             ),
                           ),
@@ -115,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                               Dimension.radius16,
                             ),
                             borderSide: BorderSide(
-                              color: Color(0xFFF2B705),
+                              color: Pallet.primary,
                               width: 1.5.w,
                             ),
                           ),
@@ -124,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                               _isPasswordHidden
                                   ? Icons.visibility_off
                                   : Icons.visibility,
-                              size: Dimension.style24,
+                              size: Dimension.radius24,
                             ),
                             onPressed: () {
                               setState(() {
@@ -136,44 +135,21 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       SizedBox(height: Dimension.height8),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Transform.scale(
-                                scale: 1,
-                                child: Checkbox(
-                                  value: _rememberMe,
-                                  activeColor: const Color(0xFFF2B705),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _rememberMe = value ?? false;
-                                    });
-                                  },
-                                ),
-                              ),
-                              Text(
-                                "Ingatkan saya",
-                                style: TextStyles.textSmRegular,
-                              ),
-                            ],
-                          ),
-
-                          TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              "Lupa password ?",
-                              style: TextStyle(
-                                fontSize: Dimension.style14,
-                                color: Color(0xFFF2B705),
-                              ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "Lupa password ?",
+                            style: TextStyle(
+                              fontSize: Dimension.style14,
+                              color: Pallet.primary,
                             ),
                           ),
-                        ],
+                        ),
                       ),
 
-                      SizedBox(height: Dimension.height24),
+                      SizedBox(height: 24),
 
                       SizedBox(
                         height: Dimension.height48,
@@ -182,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                             context.go("/home");
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFFF2B705),
+                            backgroundColor: Pallet.primary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                 Dimension.radius12,
@@ -191,14 +167,11 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           child: Text(
                             "Login",
-                            style: TextStyle(
-                              fontSize: Dimension.style16,
-                              color: Colors.white,
-                            ),
+                            style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
                       ),
-                      SizedBox(height: Dimension.height24),
+                      SizedBox(height: 24),
                     ],
                   ),
                 ),

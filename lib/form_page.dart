@@ -4,8 +4,8 @@ import 'core/design_system/themes/dimension.dart';
 import 'core/design_system/themes/pallet.dart';
 import 'core/design_system/themes/textstyles.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class FormPage extends StatelessWidget {
+  const FormPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Text("Absen dulu cuy", style: TextStyles.text2XlSemiBold),
+        child: Text("Form banyak", style: TextStyles.text2XlSemiBold),
       ),
     );
   }

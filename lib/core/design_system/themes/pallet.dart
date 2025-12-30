@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Pallet {
+  ///2B705
+  static const Color primary = Color(0xFFF2B705);
+
   ///#63784E
   /// darkGreen is a dark shade of green.
   static const Color darkGreen = Color(0xff63784E);
@@ -115,6 +118,8 @@ class Pallet {
   static LinearGradient sakuraGradient = LinearGradient(colors: sakura);
 
   //Backgrounds
+
+  static Color get primaryScBg => const Color(0xFFF6F7F9);
 
   static Color get primaryBg => const Color(0xFFC0F9FF);
 
