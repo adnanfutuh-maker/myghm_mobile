@@ -55,13 +55,14 @@ extension ProfileImageEventPatterns on ProfileImageEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _PickFromCamera value)?  pickFromCamera,TResult Function( _PickFromGallery value)?  pickFromGallery,TResult Function( _LoadSavedImage value)?  loadSavedImage,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _PickFromCamera value)?  pickFromCamera,TResult Function( _PickFromGallery value)?  pickFromGallery,TResult Function( _LoadSavedImage value)?  loadSavedImage,TResult Function( _DeleteImage value)?  deleteImage,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _PickFromCamera() when pickFromCamera != null:
 return pickFromCamera(_that);case _PickFromGallery() when pickFromGallery != null:
 return pickFromGallery(_that);case _LoadSavedImage() when loadSavedImage != null:
-return loadSavedImage(_that);case _:
+return loadSavedImage(_that);case _DeleteImage() when deleteImage != null:
+return deleteImage(_that);case _:
   return orElse();
 
 }
@@ -79,13 +80,14 @@ return loadSavedImage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _PickFromCamera value)  pickFromCamera,required TResult Function( _PickFromGallery value)  pickFromGallery,required TResult Function( _LoadSavedImage value)  loadSavedImage,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _PickFromCamera value)  pickFromCamera,required TResult Function( _PickFromGallery value)  pickFromGallery,required TResult Function( _LoadSavedImage value)  loadSavedImage,required TResult Function( _DeleteImage value)  deleteImage,}){
 final _that = this;
 switch (_that) {
 case _PickFromCamera():
 return pickFromCamera(_that);case _PickFromGallery():
 return pickFromGallery(_that);case _LoadSavedImage():
-return loadSavedImage(_that);case _:
+return loadSavedImage(_that);case _DeleteImage():
+return deleteImage(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -102,13 +104,14 @@ return loadSavedImage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _PickFromCamera value)?  pickFromCamera,TResult? Function( _PickFromGallery value)?  pickFromGallery,TResult? Function( _LoadSavedImage value)?  loadSavedImage,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _PickFromCamera value)?  pickFromCamera,TResult? Function( _PickFromGallery value)?  pickFromGallery,TResult? Function( _LoadSavedImage value)?  loadSavedImage,TResult? Function( _DeleteImage value)?  deleteImage,}){
 final _that = this;
 switch (_that) {
 case _PickFromCamera() when pickFromCamera != null:
 return pickFromCamera(_that);case _PickFromGallery() when pickFromGallery != null:
 return pickFromGallery(_that);case _LoadSavedImage() when loadSavedImage != null:
-return loadSavedImage(_that);case _:
+return loadSavedImage(_that);case _DeleteImage() when deleteImage != null:
+return deleteImage(_that);case _:
   return null;
 
 }
@@ -125,12 +128,13 @@ return loadSavedImage(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  pickFromCamera,TResult Function()?  pickFromGallery,TResult Function()?  loadSavedImage,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  pickFromCamera,TResult Function()?  pickFromGallery,TResult Function()?  loadSavedImage,TResult Function()?  deleteImage,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PickFromCamera() when pickFromCamera != null:
 return pickFromCamera();case _PickFromGallery() when pickFromGallery != null:
 return pickFromGallery();case _LoadSavedImage() when loadSavedImage != null:
-return loadSavedImage();case _:
+return loadSavedImage();case _DeleteImage() when deleteImage != null:
+return deleteImage();case _:
   return orElse();
 
 }
@@ -148,12 +152,13 @@ return loadSavedImage();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  pickFromCamera,required TResult Function()  pickFromGallery,required TResult Function()  loadSavedImage,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  pickFromCamera,required TResult Function()  pickFromGallery,required TResult Function()  loadSavedImage,required TResult Function()  deleteImage,}) {final _that = this;
 switch (_that) {
 case _PickFromCamera():
 return pickFromCamera();case _PickFromGallery():
 return pickFromGallery();case _LoadSavedImage():
-return loadSavedImage();case _:
+return loadSavedImage();case _DeleteImage():
+return deleteImage();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -170,12 +175,13 @@ return loadSavedImage();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  pickFromCamera,TResult? Function()?  pickFromGallery,TResult? Function()?  loadSavedImage,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  pickFromCamera,TResult? Function()?  pickFromGallery,TResult? Function()?  loadSavedImage,TResult? Function()?  deleteImage,}) {final _that = this;
 switch (_that) {
 case _PickFromCamera() when pickFromCamera != null:
 return pickFromCamera();case _PickFromGallery() when pickFromGallery != null:
 return pickFromGallery();case _LoadSavedImage() when loadSavedImage != null:
-return loadSavedImage();case _:
+return loadSavedImage();case _DeleteImage() when deleteImage != null:
+return deleteImage();case _:
   return null;
 
 }
@@ -271,6 +277,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'ProfileImageEvent.loadSavedImage()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _DeleteImage implements ProfileImageEvent {
+  const _DeleteImage();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeleteImage);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ProfileImageEvent.deleteImage()';
 }
 
 

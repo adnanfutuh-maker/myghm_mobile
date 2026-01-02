@@ -14,7 +14,7 @@ import 'package:myghm_mobile/features/salary_slip/presentation/pages/salary_slip
 
 import 'package:myghm_mobile/navigation/shell/app_navigation_shell.dart';
 
-import 'package:myghm_mobile/home_page.dart';
+import 'package:myghm_mobile/absen_page.dart';
 import 'package:myghm_mobile/form_page.dart';
 import 'package:myghm_mobile/data_page.dart';
 
@@ -50,8 +50,8 @@ class RoutesConfig {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: '/home',
-                builder: (context, state) => const HomePage(),
+                path: '/absen',
+                builder: (context, state) => const AbsenPage(),
               ),
             ],
           ),
@@ -60,7 +60,7 @@ class RoutesConfig {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: '/wishlist',
+                path: '/form',
                 builder: (context, state) => const FormPage(),
               ),
             ],

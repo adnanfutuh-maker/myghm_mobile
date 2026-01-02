@@ -28,6 +28,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
         state.when(
           initial: () {
             _isLoading = false;
+            _imageFile = null;
           },
           loading: () {
             _isLoading = true;
@@ -151,6 +152,18 @@ class _ProfileHeaderState extends State<ProfileHeader> {
         return SafeArea(
           child: Wrap(
             children: [
+              Center(
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 16),
+                  width: Dimension.width50,
+                  height: Dimension.height5,
+                  decoration: BoxDecoration(
+                    color: Pallet.black,
+                    borderRadius: BorderRadius.circular(Dimension.radius3),
+                  ),
+                ),
+              ),
+
               ListTile(
                 leading: const Icon(Icons.camera_alt),
                 title: const Text('Kamera'),
@@ -171,26 +184,61 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                   Navigator.pop(context);
                 },
               ),
-              ListTile(
-                leading: const Icon(Icons.visibility),
-                title: const Text('Lihat Foto'),
-                onTap: () {
-                  Navigator.pop(context);
-                  if (_imageFile != null) {
+              if (_imageFile != null) ...[
+                ListTile(
+                  leading: const Icon(Icons.visibility),
+                  title: const Text('Lihat Foto'),
+                  onTap: () {
                     context.push('/profile_photo_view');
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Belum ada foto untuk dilihat'),
-                      ),
-                    );
-                  }
-                },
-              ),
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.delete, color: Colors.red),
+                  title: const Text(
+                    'Hapus Foto',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  onTap: () {
+                    _showDeleteConfirmation();
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
             ],
           ),
         );
       },
     );
+  }
+
+  void _showDeleteConfirmation() async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (contextDialog) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        content: const Text(
+          "Hapus foto profil?",
+          style: TextStyle(fontSize: 16, color: Pallet.black),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(contextDialog).pop(false),
+            child: const Text("Batal", style: TextStyle(color: Pallet.black)),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(contextDialog).pop(true),
+            child: const Text("Hapus", style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
+
+    if (!mounted) return;
+    if (confirm == true) {
+      context.read<ProfileImageBloc>().add(
+        const ProfileImageEvent.deleteImage(),
+      );
+    }
   }
 }

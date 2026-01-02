@@ -31,7 +31,7 @@ class SalarySlipPage extends StatelessWidget {
             SizedBox(height: Dimension.height4),
             Text(
               'Data hanya tersedia 3 bulan terakhir',
-              style: TextStyle(color: Colors.grey, fontSize: Dimension.style12),
+              style: TextStyle(color: Colors.grey, fontSize: Dimension.style14),
             ),
             SizedBox(height: Dimension.height16),
 

@@ -15,6 +15,8 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:logger/logger.dart' as _i974;
 
+import '../../features/profile/domain/usecases/delete_profile_image_usecase.dart'
+    as _i90;
 import '../../features/profile/domain/usecases/load_profile_image_usecase.dart'
     as _i919;
 import '../../features/profile/domain/usecases/pick_profile_image_usecase.dart'
@@ -98,18 +100,14 @@ _i174.GetIt $initGetIt(
   gh.lazySingleton<_i860.CheckInternetUseCase>(
     () => _i860.CheckInternetUseCase(gh<_i1024.InternetConnectionService>()),
   );
+  gh.lazySingleton<_i90.DeleteProfileImageUsecase>(
+    () => _i90.DeleteProfileImageUsecase(gh<_i221.ProfileImageStorage>()),
+  );
   gh.lazySingleton<_i919.LoadProfileImageUsecase>(
     () => _i919.LoadProfileImageUsecase(gh<_i221.ProfileImageStorage>()),
   );
   gh.lazySingleton<_i93.SaveProfileImageUsecase>(
     () => _i93.SaveProfileImageUsecase(gh<_i221.ProfileImageStorage>()),
-  );
-  gh.factory<_i171.ProfileImageBloc>(
-    () => _i171.ProfileImageBloc(
-      gh<_i919.LoadProfileImageUsecase>(),
-      gh<_i469.PickProfileImageUsecase>(),
-      gh<_i93.SaveProfileImageUsecase>(),
-    ),
   );
   gh.lazySingleton<_i274.HttpClientService>(
     () => _i274.HttpClientServiceImpl(
@@ -122,6 +120,14 @@ _i174.GetIt $initGetIt(
   gh.lazySingleton<_i77.CheckDeviceDatasource>(
     () => _i77.CheckDeviceDatasourceImpl(
       httpClientService: gh<_i274.HttpClientService>(instanceName: 'base'),
+    ),
+  );
+  gh.factory<_i171.ProfileImageBloc>(
+    () => _i171.ProfileImageBloc(
+      gh<_i919.LoadProfileImageUsecase>(),
+      gh<_i469.PickProfileImageUsecase>(),
+      gh<_i93.SaveProfileImageUsecase>(),
+      gh<_i90.DeleteProfileImageUsecase>(),
     ),
   );
   gh.lazySingleton<_i24.CheckConnectionServerDatasource>(

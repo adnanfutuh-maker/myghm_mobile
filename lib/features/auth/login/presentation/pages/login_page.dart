@@ -155,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                         height: Dimension.height48,
                         child: ElevatedButton(
                           onPressed: () {
-                            context.go("/home");
+                            context.go("/absen");
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Pallet.primary,
