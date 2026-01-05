@@ -52,3 +52,47 @@ class FiscalException extends AppException {
     super.code = 'FISCALIZATION_EXCEPTION',
   });
 }
+
+class FaceDetectionException extends AppException {
+  const FaceDetectionException({required super.code, required super.message});
+
+  /// Path gambar kosong
+  factory FaceDetectionException.emptyPath() {
+    return const FaceDetectionException(
+      code: 'FACE_IMAGE_PATH_EMPTY',
+      message: 'Path gambar kosong',
+    );
+  }
+
+  /// File gambar tidak ditemukan
+  factory FaceDetectionException.fileNotFound() {
+    return const FaceDetectionException(
+      code: 'FACE_IMAGE_NOT_FOUND',
+      message: 'File gambar tidak ditemukan',
+    );
+  }
+
+  /// Tidak ada wajah terdeteksi
+  factory FaceDetectionException.noFaceDetected() {
+    return const FaceDetectionException(
+      code: 'FACE_NOT_DETECTED',
+      message: 'Wajah tidak terdeteksi, pastikan wajah terlihat jelas',
+    );
+  }
+
+  /// Lebih dari satu wajah
+  factory FaceDetectionException.multipleFaceDetected() {
+    return const FaceDetectionException(
+      code: 'MULTIPLE_FACE_DETECTED',
+      message: 'Terdeteksi lebih dari satu wajah',
+    );
+  }
+
+  /// Error ML Kit / proses gagal
+  factory FaceDetectionException.processFailed() {
+    return const FaceDetectionException(
+      code: 'FACE_PROCESS_FAILED',
+      message: 'Gagal memproses deteksi wajah',
+    );
+  }
+}

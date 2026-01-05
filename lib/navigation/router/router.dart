@@ -14,7 +14,7 @@ import 'package:myghm_mobile/features/salary_slip/presentation/pages/salary_slip
 
 import 'package:myghm_mobile/navigation/shell/app_navigation_shell.dart';
 
-import 'package:myghm_mobile/absen_page.dart';
+import 'package:myghm_mobile/features/absen/presentation/pages/absen_page.dart';
 import 'package:myghm_mobile/form_page.dart';
 import 'package:myghm_mobile/data_page.dart';
 
