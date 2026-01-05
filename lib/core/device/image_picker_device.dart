@@ -11,6 +11,7 @@ class ImagePickerDeviceImpl implements ImagePickerDevice {
   Future<File?> pickFromCamera() async {
     final image = await _picker.pickImage(
       source: ImageSource.camera,
+      preferredCameraDevice: CameraDevice.front,
       imageQuality: 80,
     );
 
