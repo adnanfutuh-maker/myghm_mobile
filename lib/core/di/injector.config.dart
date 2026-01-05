@@ -15,6 +15,11 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:logger/logger.dart' as _i974;
 
+import '../../features/absen/domain/usecases/pick_absen_image_usecase.dart'
+    as _i127;
+import '../../features/absen/domain/usecases/validate_face_usecase.dart'
+    as _i121;
+import '../../features/absen/presentation/bloc/absen_bloc.dart' as _i566;
 import '../../features/profile/domain/usecases/delete_profile_image_usecase.dart'
     as _i90;
 import '../../features/profile/domain/usecases/load_profile_image_usecase.dart'
@@ -47,6 +52,7 @@ import '../../features/splash/domain/usecases/check_internet_usecase.dart'
 import '../../features/splash/domain/usecases/check_location_permission_usecase.dart'
     as _i247;
 import '../../features/splash/presentation/bloc/splash_bloc.dart' as _i442;
+import '../device/face_detection/face_detection_device.dart' as _i240;
 import '../device/image_picker_device.dart' as _i184;
 import '../device/profile_image_storage_device.dart' as _i221;
 import '../services/geolocation/geolocation_service.dart' as _i591;
@@ -72,6 +78,9 @@ _i174.GetIt $initGetIt(
   gh.lazySingleton<_i247.CheckLocationPermissionUseCase>(
     () => _i247.CheckLocationPermissionUseCase(),
   );
+  gh.lazySingleton<_i240.FaceDetectionDevice>(
+    () => _i240.FaceDetectionDeviceImpl(),
+  );
   gh.factory<_i361.Dio>(() => registerModule.dio(), instanceName: 'base');
   gh.lazySingleton<_i184.ImagePickerDevice>(
     () => _i184.ImagePickerDeviceImpl(),
@@ -83,13 +92,25 @@ _i174.GetIt $initGetIt(
   gh.lazySingleton<_i221.ProfileImageStorage>(
     () => _i221.ProfileImageStorageImpl(),
   );
+  gh.lazySingleton<_i121.ValidateFaceUsecase>(
+    () => _i121.ValidateFaceUsecase(gh<_i240.FaceDetectionDevice>()),
+  );
   gh.lazySingleton<_i1024.InternetConnectionService>(
     () => _i1024.InternetConnectionServiceImpl(
       connectivity: gh<_i895.Connectivity>(),
     ),
   );
+  gh.lazySingleton<_i127.PickAbsenImageUsecase>(
+    () => _i127.PickAbsenImageUsecase(gh<_i184.ImagePickerDevice>()),
+  );
   gh.lazySingleton<_i469.PickProfileImageUsecase>(
     () => _i469.PickProfileImageUsecase(gh<_i184.ImagePickerDevice>()),
+  );
+  gh.factory<_i566.AbsenBloc>(
+    () => _i566.AbsenBloc(
+      gh<_i127.PickAbsenImageUsecase>(),
+      gh<_i121.ValidateFaceUsecase>(),
+    ),
   );
   gh.lazySingleton<_i327.LoggerService>(
     () => _i327.LoggerServiceImpl(
