@@ -75,17 +75,21 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
                 } else if (failure is ServerException) {
                   emit(const SplashState.serverDown());
                   return false;
+                } else if (failure is DeviceNotRegistered) {
+                  emit(const SplashState.deviceNotRegistered());
+                  return false;
                 }
+
                 emit(SplashState.failure(failure));
               },
               (device) {
                 final token = device.accessToken;
 
-                if (device.registerApps.toUpperCase() == 'N') {
+                if (device.registerApps == null) {
                   emit(const SplashState.deviceNotRegistered());
                   return;
                 }
-                if (device.status.toLowerCase() == "error") {
+                if (device.message.toLowerCase() == "Device Tidak Ditemukan") {
                   emit(const SplashState.deviceNotRegistered());
                 } else if ((device.expiresIn ?? 0) <= 0) {
                   secureStorage.delete('access_token');

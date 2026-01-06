@@ -20,6 +20,14 @@ import '../../features/absen/domain/usecases/pick_absen_image_usecase.dart'
 import '../../features/absen/domain/usecases/validate_face_usecase.dart'
     as _i121;
 import '../../features/absen/presentation/bloc/absen_bloc.dart' as _i566;
+import '../../features/auth/register/data/datasources/register_datasource.dart'
+    as _i155;
+import '../../features/auth/register/data/repositories/register_repository.dart'
+    as _i701;
+import '../../features/auth/register/domain/usecases/register_usecase.dart'
+    as _i276;
+import '../../features/auth/register/presentation/bloc/register_bloc.dart'
+    as _i151;
 import '../../features/profile/domain/usecases/delete_profile_image_usecase.dart'
     as _i90;
 import '../../features/profile/domain/usecases/load_profile_image_usecase.dart'
@@ -145,6 +153,16 @@ _i174.GetIt $initGetIt(
       httpClientService: gh<_i274.HttpClientService>(instanceName: 'base'),
     ),
   );
+  gh.lazySingleton<_i155.RegisterDatasource>(
+    () => _i155.RegisterDatasourceImpl(
+      httpClientService: gh<_i274.HttpClientService>(instanceName: 'base'),
+    ),
+  );
+  gh.lazySingleton<_i701.RegisterRepository>(
+    () => _i701.RegisterRepositoryImpl(
+      datasource: gh<_i155.RegisterDatasource>(),
+    ),
+  );
   gh.factory<_i171.ProfileImageBloc>(
     () => _i171.ProfileImageBloc(
       gh<_i919.LoadProfileImageUsecase>(),
@@ -152,6 +170,9 @@ _i174.GetIt $initGetIt(
       gh<_i93.SaveProfileImageUsecase>(),
       gh<_i90.DeleteProfileImageUsecase>(),
     ),
+  );
+  gh.lazySingleton<_i276.RegisterUsecase>(
+    () => _i276.RegisterUsecase(repository: gh<_i701.RegisterRepository>()),
   );
   gh.lazySingleton<_i24.CheckConnectionServerDatasource>(
     () => _i24.CheckConnectionServerDatasourceImpl(
@@ -167,6 +188,9 @@ _i174.GetIt $initGetIt(
     () => _i542.CheckDeviceRepositoryImpl(
       datasource: gh<_i77.CheckDeviceDatasource>(),
     ),
+  );
+  gh.factory<_i151.RegisterBloc>(
+    () => _i151.RegisterBloc(gh<_i276.RegisterUsecase>()),
   );
   gh.lazySingleton<_i492.CheckConnectionServerRepository>(
     () => _i492.CheckConnectionServerRepositoryImpl(

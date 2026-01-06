@@ -37,14 +37,23 @@ class CheckDeviceDatasourceImpl implements CheckDeviceDatasource {
 
       final response = await httpClientService.post(
         path: '${Env.baseEndpoint}check-device/',
-        data: {'device_id': "77cf24f47bc37867"},
+        data: {'device_id': deviceId},
         options: Options(
           validateStatus: (status) => status != null && status < 500,
         ),
       );
+      if (response.statusCode == 422) {
+        throw DeviceNotRegistered();
+      }
+
+      if (response.statusCode != 200) {
+        throw ServerException(message: 'Server error');
+      }
       return CheckDeviceModel.fromJson(response.data);
     } on InternetConnectionException catch (e) {
       throw InternetConnectionException(code: e.code, message: e.message);
+    } on DeviceNotRegistered catch (e) {
+      throw DeviceNotRegistered(code: e.code, message: e.message);
     } catch (e) {
       throw ServerException(error: e, message: e.toString());
     }

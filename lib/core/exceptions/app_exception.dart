@@ -39,6 +39,13 @@ class ServerException extends AppException {
   });
 }
 
+class DeviceNotRegistered extends AppException {
+  const DeviceNotRegistered({
+    super.message = 'Device Tidak Ditemukan',
+    super.code = 'Device Tidak Ditemukan',
+  });
+}
+
 class LocalStorageException extends AppException {
   const LocalStorageException({
     super.message = 'LOCAL_STORAGE_ERROR',

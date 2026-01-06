@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CheckDeviceModel {
 
- String get status; String get message;@JsonKey(name: "register_apps") String get registerApps;@JsonKey(name: "access_token") String? get accessToken;@JsonKey(name: "token_type") String? get tokenType;@JsonKey(name: "expires_in") int? get expiresIn;
+ String get status; String get message;@JsonKey(name: "register_apps") String? get registerApps;@JsonKey(name: "access_token") String? get accessToken;@JsonKey(name: "token_type") String? get tokenType;@JsonKey(name: "expires_in") int? get expiresIn;
 /// Create a copy of CheckDeviceModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $CheckDeviceModelCopyWith<$Res>  {
   factory $CheckDeviceModelCopyWith(CheckDeviceModel value, $Res Function(CheckDeviceModel) _then) = _$CheckDeviceModelCopyWithImpl;
 @useResult
 $Res call({
- String status, String message,@JsonKey(name: "register_apps") String registerApps,@JsonKey(name: "access_token") String? accessToken,@JsonKey(name: "token_type") String? tokenType,@JsonKey(name: "expires_in") int? expiresIn
+ String status, String message,@JsonKey(name: "register_apps") String? registerApps,@JsonKey(name: "access_token") String? accessToken,@JsonKey(name: "token_type") String? tokenType,@JsonKey(name: "expires_in") int? expiresIn
 });
 
 
@@ -65,12 +65,12 @@ class _$CheckDeviceModelCopyWithImpl<$Res>
 
 /// Create a copy of CheckDeviceModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? message = null,Object? registerApps = null,Object? accessToken = freezed,Object? tokenType = freezed,Object? expiresIn = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? message = null,Object? registerApps = freezed,Object? accessToken = freezed,Object? tokenType = freezed,Object? expiresIn = freezed,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,registerApps: null == registerApps ? _self.registerApps : registerApps // ignore: cast_nullable_to_non_nullable
-as String,accessToken: freezed == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
+as String,registerApps: freezed == registerApps ? _self.registerApps : registerApps // ignore: cast_nullable_to_non_nullable
+as String?,accessToken: freezed == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
 as String?,tokenType: freezed == tokenType ? _self.tokenType : tokenType // ignore: cast_nullable_to_non_nullable
 as String?,expiresIn: freezed == expiresIn ? _self.expiresIn : expiresIn // ignore: cast_nullable_to_non_nullable
 as int?,
@@ -158,7 +158,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String status,  String message, @JsonKey(name: "register_apps")  String registerApps, @JsonKey(name: "access_token")  String? accessToken, @JsonKey(name: "token_type")  String? tokenType, @JsonKey(name: "expires_in")  int? expiresIn)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String status,  String message, @JsonKey(name: "register_apps")  String? registerApps, @JsonKey(name: "access_token")  String? accessToken, @JsonKey(name: "token_type")  String? tokenType, @JsonKey(name: "expires_in")  int? expiresIn)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CheckDeviceModel() when $default != null:
 return $default(_that.status,_that.message,_that.registerApps,_that.accessToken,_that.tokenType,_that.expiresIn);case _:
@@ -179,7 +179,7 @@ return $default(_that.status,_that.message,_that.registerApps,_that.accessToken,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String status,  String message, @JsonKey(name: "register_apps")  String registerApps, @JsonKey(name: "access_token")  String? accessToken, @JsonKey(name: "token_type")  String? tokenType, @JsonKey(name: "expires_in")  int? expiresIn)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String status,  String message, @JsonKey(name: "register_apps")  String? registerApps, @JsonKey(name: "access_token")  String? accessToken, @JsonKey(name: "token_type")  String? tokenType, @JsonKey(name: "expires_in")  int? expiresIn)  $default,) {final _that = this;
 switch (_that) {
 case _CheckDeviceModel():
 return $default(_that.status,_that.message,_that.registerApps,_that.accessToken,_that.tokenType,_that.expiresIn);case _:
@@ -199,7 +199,7 @@ return $default(_that.status,_that.message,_that.registerApps,_that.accessToken,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String status,  String message, @JsonKey(name: "register_apps")  String registerApps, @JsonKey(name: "access_token")  String? accessToken, @JsonKey(name: "token_type")  String? tokenType, @JsonKey(name: "expires_in")  int? expiresIn)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String status,  String message, @JsonKey(name: "register_apps")  String? registerApps, @JsonKey(name: "access_token")  String? accessToken, @JsonKey(name: "token_type")  String? tokenType, @JsonKey(name: "expires_in")  int? expiresIn)?  $default,) {final _that = this;
 switch (_that) {
 case _CheckDeviceModel() when $default != null:
 return $default(_that.status,_that.message,_that.registerApps,_that.accessToken,_that.tokenType,_that.expiresIn);case _:
@@ -214,12 +214,12 @@ return $default(_that.status,_that.message,_that.registerApps,_that.accessToken,
 @JsonSerializable()
 
 class _CheckDeviceModel implements CheckDeviceModel {
-  const _CheckDeviceModel({required this.status, required this.message, @JsonKey(name: "register_apps") required this.registerApps, @JsonKey(name: "access_token") this.accessToken, @JsonKey(name: "token_type") this.tokenType, @JsonKey(name: "expires_in") this.expiresIn});
+  const _CheckDeviceModel({required this.status, required this.message, @JsonKey(name: "register_apps") this.registerApps, @JsonKey(name: "access_token") this.accessToken, @JsonKey(name: "token_type") this.tokenType, @JsonKey(name: "expires_in") this.expiresIn});
   factory _CheckDeviceModel.fromJson(Map<String, dynamic> json) => _$CheckDeviceModelFromJson(json);
 
 @override final  String status;
 @override final  String message;
-@override@JsonKey(name: "register_apps") final  String registerApps;
+@override@JsonKey(name: "register_apps") final  String? registerApps;
 @override@JsonKey(name: "access_token") final  String? accessToken;
 @override@JsonKey(name: "token_type") final  String? tokenType;
 @override@JsonKey(name: "expires_in") final  int? expiresIn;
@@ -257,7 +257,7 @@ abstract mixin class _$CheckDeviceModelCopyWith<$Res> implements $CheckDeviceMod
   factory _$CheckDeviceModelCopyWith(_CheckDeviceModel value, $Res Function(_CheckDeviceModel) _then) = __$CheckDeviceModelCopyWithImpl;
 @override @useResult
 $Res call({
- String status, String message,@JsonKey(name: "register_apps") String registerApps,@JsonKey(name: "access_token") String? accessToken,@JsonKey(name: "token_type") String? tokenType,@JsonKey(name: "expires_in") int? expiresIn
+ String status, String message,@JsonKey(name: "register_apps") String? registerApps,@JsonKey(name: "access_token") String? accessToken,@JsonKey(name: "token_type") String? tokenType,@JsonKey(name: "expires_in") int? expiresIn
 });
 
 
@@ -274,12 +274,12 @@ class __$CheckDeviceModelCopyWithImpl<$Res>
 
 /// Create a copy of CheckDeviceModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? message = null,Object? registerApps = null,Object? accessToken = freezed,Object? tokenType = freezed,Object? expiresIn = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? message = null,Object? registerApps = freezed,Object? accessToken = freezed,Object? tokenType = freezed,Object? expiresIn = freezed,}) {
   return _then(_CheckDeviceModel(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,registerApps: null == registerApps ? _self.registerApps : registerApps // ignore: cast_nullable_to_non_nullable
-as String,accessToken: freezed == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
+as String,registerApps: freezed == registerApps ? _self.registerApps : registerApps // ignore: cast_nullable_to_non_nullable
+as String?,accessToken: freezed == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
 as String?,tokenType: freezed == tokenType ? _self.tokenType : tokenType // ignore: cast_nullable_to_non_nullable
 as String?,expiresIn: freezed == expiresIn ? _self.expiresIn : expiresIn // ignore: cast_nullable_to_non_nullable
 as int?,

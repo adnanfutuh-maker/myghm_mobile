@@ -10,7 +10,7 @@ _CheckDeviceModel _$CheckDeviceModelFromJson(Map<String, dynamic> json) =>
     _CheckDeviceModel(
       status: json['status'] as String,
       message: json['message'] as String,
-      registerApps: json['register_apps'] as String,
+      registerApps: json['register_apps'] as String?,
       accessToken: json['access_token'] as String?,
       tokenType: json['token_type'] as String?,
       expiresIn: (json['expires_in'] as num?)?.toInt(),
