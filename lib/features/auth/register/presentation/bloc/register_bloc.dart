@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../core/exceptions/app_exception.dart';
 import '../../domain/usecases/register_usecase.dart';
 import '../../data/models/register_data_model.dart';
 
@@ -24,6 +25,18 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
           result.fold(
             (failure) {
+              if (failure is InternetConnectionException) {
+                emit(const RegisterState.noInternet());
+                return false;
+              } else if (failure is ServerException) {
+                emit(const RegisterState.serverDown());
+                return false;
+              }
+              if (failure is DataNotFoundException) {
+                emit(const RegisterState.dataNotFound());
+                return false;
+              }
+
               emit(RegisterState.failure(failure));
             },
             (success) {

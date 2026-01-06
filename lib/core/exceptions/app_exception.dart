@@ -60,6 +60,13 @@ class FiscalException extends AppException {
   });
 }
 
+class DataNotFoundException extends AppException {
+  const DataNotFoundException({
+    super.message = 'DATA_NONT_FOUND',
+    super.code = 'DATA_NONT_FOUND',
+  });
+}
+
 class FaceDetectionException extends AppException {
   const FaceDetectionException({required super.code, required super.message});
 

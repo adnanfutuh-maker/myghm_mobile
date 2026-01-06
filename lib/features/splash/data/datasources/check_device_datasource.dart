@@ -46,9 +46,6 @@ class CheckDeviceDatasourceImpl implements CheckDeviceDatasource {
         throw DeviceNotRegistered();
       }
 
-      if (response.statusCode != 200) {
-        throw ServerException(message: 'Server error');
-      }
       return CheckDeviceModel.fromJson(response.data);
     } on InternetConnectionException catch (e) {
       throw InternetConnectionException(code: e.code, message: e.message);

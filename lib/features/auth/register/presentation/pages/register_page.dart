@@ -7,12 +7,15 @@ import 'package:go_router/go_router.dart';
 import 'package:myghm_mobile/core/design_system/themes/pallet.dart';
 import 'package:myghm_mobile/core/design_system/themes/textstyles.dart';
 import 'package:myghm_mobile/core/design_system/themes/dimension.dart';
+import 'package:myghm_mobile/core/utils/validator/validation.dart';
+import 'package:myghm_mobile/features/auth/register/presentation/widgets/register_dialog.dart';
 
-import '../../../../../core/utils/zona/indonesia_timezone_util.dart';
+import '../../../../../core/utils/zona/indonesioa_timezone_util.dart';
 import '../bloc/register_bloc.dart';
 import '../bloc/register_event.dart';
 import '../bloc/register_state.dart';
 import '../../data/models/register_data_model.dart';
+import '../widgets/custom_textfield.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -22,14 +25,12 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final _formKey = GlobalKey<FormState>();
   final _nipController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
   final _rePasswordController = TextEditingController();
-
-  bool _isPasswordHidden = true;
-  bool _isRePasswordHidden = true;
 
   @override
   void dispose() {
@@ -42,10 +43,12 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _submitRegister(BuildContext blocContext) {
+    if (!_formKey.currentState!.validate()) return;
+
     final timezone = IndonesianTimezoneUtil.getTimezone();
 
     final data = RegisterDataModel(
-      deviceId: 'device_id',
+      deviceId: 'device_id_here',
       nip: _nipController.text.trim(),
       email: _emailController.text.trim(),
       phone: _phoneController.text.trim(),
@@ -64,21 +67,10 @@ class _RegisterPageState extends State<RegisterPage> {
       child: BlocListener<RegisterBloc, RegisterState>(
         listener: (context, state) {
           state.whenOrNull(
-            loading: () {
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (_) =>
-                    const Center(child: CircularProgressIndicator()),
-              );
-            },
-            success: (result) {
-              Navigator.pop(context);
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text(result.message)));
-              context.go('/login');
-            },
+            noInternet: () => RegisterDialog.noInternet(context),
+            serverDown: () => RegisterDialog.serverDown(context),
+            dataNotFound: () => RegisterDialog.dataNotFound(context),
+            success: (result) => context.go('/login'),
             failure: (failure) {
               Navigator.pop(context);
               ScaffoldMessenger.of(
@@ -113,43 +105,44 @@ class _RegisterPageState extends State<RegisterPage> {
                 maxChildSize: 0.80,
                 snap: true,
                 snapSizes: const [0.60, 0.80],
-                builder: (context, scrollController) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(Dimension.radius32),
-                      ),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 12,
-                          offset: Offset(0, -4),
-                        ),
-                      ],
+                builder: (context, scrollController) => Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(Dimension.radius32),
                     ),
-                    child: Column(
-                      children: [
-                        SizedBox(height: Dimension.height12),
-                        Center(
-                          child: Container(
-                            width: Dimension.width48,
-                            height: Dimension.height5,
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade400,
-                              borderRadius: BorderRadius.circular(
-                                Dimension.radius3,
-                              ),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 12,
+                        offset: Offset(0, -4),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(height: Dimension.height12),
+                      Center(
+                        child: Container(
+                          width: Dimension.width48,
+                          height: Dimension.height5,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade400,
+                            borderRadius: BorderRadius.circular(
+                              Dimension.radius3,
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            controller: scrollController,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: Dimension.width24,
-                              vertical: Dimension.height32,
-                            ),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          controller: scrollController,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: Dimension.width24,
+                            vertical: Dimension.height16,
+                          ),
+                          child: Form(
+                            key: _formKey,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
@@ -160,123 +153,94 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                                 SizedBox(height: Dimension.height32),
 
-                                TextField(
+                                CustomTextField(
                                   controller: _nipController,
-                                  decoration: _inputDecoration("NIP"),
+                                  label: "NIP",
+                                  validator: (value) =>
+                                      MyValidatior.validateEmptyText(
+                                        "NIP",
+                                        value,
+                                      ),
                                 ),
                                 SizedBox(height: Dimension.height16),
 
-                                TextField(
+                                CustomTextField(
                                   controller: _emailController,
-                                  decoration: _inputDecoration("Email"),
+                                  label: "Email",
+                                  keyboardType: TextInputType.emailAddress,
+                                  validator: (value) =>
+                                      MyValidatior.validateEmail(value),
                                 ),
                                 SizedBox(height: Dimension.height16),
 
-                                TextField(
+                                CustomTextField(
                                   controller: _phoneController,
-                                  decoration: _inputDecoration("No Hp"),
+                                  label: "No Hp",
+                                  keyboardType: TextInputType.phone,
+                                  validator: (value) =>
+                                      MyValidatior.validatePhoneNUmber(value),
                                 ),
                                 SizedBox(height: Dimension.height16),
 
-                                TextField(
+                                CustomTextField(
                                   controller: _passwordController,
-                                  obscureText: _isPasswordHidden,
-                                  decoration: _inputDecoration("Password")
-                                      .copyWith(
-                                        suffixIcon: IconButton(
-                                          icon: Icon(
-                                            _isPasswordHidden
-                                                ? Icons.visibility_off
-                                                : Icons.visibility,
-                                          ),
-                                          onPressed: () {
-                                            setState(() {
-                                              _isPasswordHidden =
-                                                  !_isPasswordHidden;
-                                            });
-                                          },
-                                        ),
-                                      ),
+                                  label: "Password",
+                                  isPassword: true,
+                                  validator: (value) =>
+                                      MyValidatior.validatePassword(value),
                                 ),
                                 SizedBox(height: Dimension.height16),
 
-                                TextField(
+                                CustomTextField(
                                   controller: _rePasswordController,
-                                  obscureText: _isRePasswordHidden,
-                                  decoration: _inputDecoration("RePassword")
-                                      .copyWith(
-                                        suffixIcon: IconButton(
-                                          icon: Icon(
-                                            _isRePasswordHidden
-                                                ? Icons.visibility_off
-                                                : Icons.visibility,
-                                          ),
-                                          onPressed: () {
-                                            setState(() {
-                                              _isRePasswordHidden =
-                                                  !_isRePasswordHidden;
-                                            });
-                                          },
-                                        ),
-                                      ),
+                                  label: "RePassword",
+                                  isPassword: true,
+                                  validator: (value) {
+                                    if (value != _passwordController.text) {
+                                      return 'Passwords do not match';
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 SizedBox(height: Dimension.height32),
 
                                 Builder(
-                                  builder: (blocContext) {
-                                    return SizedBox(
-                                      height: Dimension.height48,
-                                      child: ElevatedButton(
-                                        onPressed: () =>
-                                            _submitRegister(blocContext),
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Pallet.primary,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              Dimension.radius12,
-                                            ),
-                                          ),
-                                        ),
-                                        child: const Text(
-                                          "Register",
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.white,
+                                  builder: (blocContext) => SizedBox(
+                                    height: Dimension.height48,
+                                    child: ElevatedButton(
+                                      onPressed: () =>
+                                          _submitRegister(blocContext),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Pallet.primary,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            Dimension.radius12,
                                           ),
                                         ),
                                       ),
-                                    );
-                                  },
+                                      child: const Text(
+                                        "Register",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                                 SizedBox(height: Dimension.height16),
                               ],
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  );
-                },
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  InputDecoration _inputDecoration(String label) {
-    return InputDecoration(
-      labelText: label,
-      labelStyle: TextStyles.textSmRegular,
-      floatingLabelStyle: const TextStyle(color: Pallet.black),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(Dimension.radius16),
-        borderSide: const BorderSide(color: Pallet.black),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(Dimension.radius16),
-        borderSide: BorderSide(color: Pallet.primary, width: 1.5.w),
       ),
     );
   }

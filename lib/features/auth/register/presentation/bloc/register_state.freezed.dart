@@ -55,12 +55,15 @@ extension RegisterStatePatterns on RegisterState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _Success value)?  success,TResult Function( _Failure value)?  failure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _NoInternet value)?  noInternet,TResult Function( _ServerDown value)?  serverDown,TResult Function( _DataNotFound value)?  dataNotFound,TResult Function( _Success value)?  success,TResult Function( _Failure value)?  failure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _Loading() when loading != null:
-return loading(_that);case _Success() when success != null:
+return loading(_that);case _NoInternet() when noInternet != null:
+return noInternet(_that);case _ServerDown() when serverDown != null:
+return serverDown(_that);case _DataNotFound() when dataNotFound != null:
+return dataNotFound(_that);case _Success() when success != null:
 return success(_that);case _Failure() when failure != null:
 return failure(_that);case _:
   return orElse();
@@ -80,12 +83,15 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _Success value)  success,required TResult Function( _Failure value)  failure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _NoInternet value)  noInternet,required TResult Function( _ServerDown value)  serverDown,required TResult Function( _DataNotFound value)  dataNotFound,required TResult Function( _Success value)  success,required TResult Function( _Failure value)  failure,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that);case _Loading():
-return loading(_that);case _Success():
+return loading(_that);case _NoInternet():
+return noInternet(_that);case _ServerDown():
+return serverDown(_that);case _DataNotFound():
+return dataNotFound(_that);case _Success():
 return success(_that);case _Failure():
 return failure(_that);case _:
   throw StateError('Unexpected subclass');
@@ -104,12 +110,15 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _Success value)?  success,TResult? Function( _Failure value)?  failure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _NoInternet value)?  noInternet,TResult? Function( _ServerDown value)?  serverDown,TResult? Function( _DataNotFound value)?  dataNotFound,TResult? Function( _Success value)?  success,TResult? Function( _Failure value)?  failure,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _Loading() when loading != null:
-return loading(_that);case _Success() when success != null:
+return loading(_that);case _NoInternet() when noInternet != null:
+return noInternet(_that);case _ServerDown() when serverDown != null:
+return serverDown(_that);case _DataNotFound() when dataNotFound != null:
+return dataNotFound(_that);case _Success() when success != null:
 return success(_that);case _Failure() when failure != null:
 return failure(_that);case _:
   return null;
@@ -128,11 +137,14 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( RegisterResultModel result)?  success,TResult Function( AppException failure)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function()?  noInternet,TResult Function()?  serverDown,TResult Function()?  dataNotFound,TResult Function( RegisterResultModel result)?  success,TResult Function( AppException failure)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
-return loading();case _Success() when success != null:
+return loading();case _NoInternet() when noInternet != null:
+return noInternet();case _ServerDown() when serverDown != null:
+return serverDown();case _DataNotFound() when dataNotFound != null:
+return dataNotFound();case _Success() when success != null:
 return success(_that.result);case _Failure() when failure != null:
 return failure(_that.failure);case _:
   return orElse();
@@ -152,11 +164,14 @@ return failure(_that.failure);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( RegisterResultModel result)  success,required TResult Function( AppException failure)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function()  noInternet,required TResult Function()  serverDown,required TResult Function()  dataNotFound,required TResult Function( RegisterResultModel result)  success,required TResult Function( AppException failure)  failure,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
-return loading();case _Success():
+return loading();case _NoInternet():
+return noInternet();case _ServerDown():
+return serverDown();case _DataNotFound():
+return dataNotFound();case _Success():
 return success(_that.result);case _Failure():
 return failure(_that.failure);case _:
   throw StateError('Unexpected subclass');
@@ -175,11 +190,14 @@ return failure(_that.failure);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( RegisterResultModel result)?  success,TResult? Function( AppException failure)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function()?  noInternet,TResult? Function()?  serverDown,TResult? Function()?  dataNotFound,TResult? Function( RegisterResultModel result)?  success,TResult? Function( AppException failure)?  failure,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
-return loading();case _Success() when success != null:
+return loading();case _NoInternet() when noInternet != null:
+return noInternet();case _ServerDown() when serverDown != null:
+return serverDown();case _DataNotFound() when dataNotFound != null:
+return dataNotFound();case _Success() when success != null:
 return success(_that.result);case _Failure() when failure != null:
 return failure(_that.failure);case _:
   return null;
@@ -245,6 +263,102 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'RegisterState.loading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _NoInternet implements RegisterState {
+  const _NoInternet();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NoInternet);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'RegisterState.noInternet()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _ServerDown implements RegisterState {
+  const _ServerDown();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ServerDown);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'RegisterState.serverDown()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _DataNotFound implements RegisterState {
+  const _DataNotFound();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DataNotFound);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'RegisterState.dataNotFound()';
 }
 
 

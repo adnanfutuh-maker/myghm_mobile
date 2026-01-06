@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:myghm_mobile/features/auth/register/data/models/register_data_model.dart';
 import 'package:myghm_mobile/features/auth/register/data/models/register_result_model.dart';
@@ -21,10 +22,20 @@ class RegisterDatasourceImpl implements RegisterDatasource {
       final response = await httpClientService.post(
         path: '${Env.baseEndpoint}register-device/',
         data: data.toJson(),
+        options: Options(
+          validateStatus: (status) => status != null && status < 500,
+        ),
       );
+
+      if (response.statusCode == 422) {
+        throw DataNotFoundException();
+      }
+
       return RegisterResultModel.fromJson(response.data);
     } on InternetConnectionException catch (e) {
       throw InternetConnectionException(code: e.code, message: e.message);
+    } on DataNotFoundException catch (e) {
+      throw DataNotFoundException(code: e.code, message: e.message);
     } catch (e) {
       throw ServerException(error: e, message: e.toString());
     }
