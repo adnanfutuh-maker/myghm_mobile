@@ -10,6 +10,7 @@ import 'package:myghm_mobile/core/design_system/themes/dimension.dart';
 import 'package:myghm_mobile/core/utils/validator/validation.dart';
 import 'package:myghm_mobile/features/auth/register/presentation/widgets/register_dialog.dart';
 
+import '../../../../../core/device/device_id/device_id.dart';
 import '../../../../../core/utils/zona/indonesioa_timezone_util.dart';
 import '../bloc/register_bloc.dart';
 import '../bloc/register_event.dart';
@@ -42,13 +43,17 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-  void _submitRegister(BuildContext blocContext) {
+  void _submitRegister(BuildContext blocContext) async {
     if (!_formKey.currentState!.validate()) return;
+
+    final registerBloc = blocContext.read<RegisterBloc>();
+    final deviceIdService = GetIt.instance<DeviceId>();
+    final deviceId = await deviceIdService.getDeviceId();
 
     final timezone = IndonesianTimezoneUtil.getTimezone();
 
     final data = RegisterDataModel(
-      deviceId: 'device_id_here',
+      deviceId: deviceId,
       nip: _nipController.text.trim(),
       email: _emailController.text.trim(),
       phone: _phoneController.text.trim(),
@@ -56,8 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
       rePassword: _rePasswordController.text,
       timezone: timezone,
     );
-
-    blocContext.read<RegisterBloc>().add(RegisterEvent.submit(data: data));
+    registerBloc.add(RegisterEvent.submit(data: data));
   }
 
   @override

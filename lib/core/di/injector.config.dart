@@ -61,6 +61,7 @@ import '../../features/splash/domain/usecases/check_location_permission_usecase.
     as _i247;
 import '../../features/splash/presentation/bloc/splash_bloc.dart' as _i442;
 import '../device/camera/camera_device.dart' as _i780;
+import '../device/device_id/device_id.dart' as _i675;
 import '../device/face_detection/face_detection_device.dart' as _i240;
 import '../device/image_picker_device.dart' as _i184;
 import '../device/profile_image_storage_device.dart' as _i221;
@@ -95,6 +96,7 @@ _i174.GetIt $initGetIt(
   gh.lazySingleton<_i184.ImagePickerDevice>(
     () => _i184.ImagePickerDeviceImpl(),
   );
+  gh.lazySingleton<_i675.DeviceId>(() => _i675.DeviceIdImpl());
   gh.lazySingleton<_i591.GeolocationService>(
     () => _i591.GeolocationServiceImpl(),
   );
@@ -148,11 +150,6 @@ _i174.GetIt $initGetIt(
     ),
     instanceName: 'base',
   );
-  gh.lazySingleton<_i77.CheckDeviceDatasource>(
-    () => _i77.CheckDeviceDatasourceImpl(
-      httpClientService: gh<_i274.HttpClientService>(instanceName: 'base'),
-    ),
-  );
   gh.lazySingleton<_i155.RegisterDatasource>(
     () => _i155.RegisterDatasourceImpl(
       httpClientService: gh<_i274.HttpClientService>(instanceName: 'base'),
@@ -169,6 +166,12 @@ _i174.GetIt $initGetIt(
       gh<_i469.PickProfileImageUsecase>(),
       gh<_i93.SaveProfileImageUsecase>(),
       gh<_i90.DeleteProfileImageUsecase>(),
+    ),
+  );
+  gh.lazySingleton<_i77.CheckDeviceDatasource>(
+    () => _i77.CheckDeviceDatasourceImpl(
+      httpClientService: gh<_i274.HttpClientService>(instanceName: 'base'),
+      deviceIdService: gh<_i675.DeviceId>(),
     ),
   );
   gh.lazySingleton<_i276.RegisterUsecase>(
