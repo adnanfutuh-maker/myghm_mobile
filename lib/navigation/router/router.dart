@@ -15,8 +15,8 @@ import 'package:myghm_mobile/features/salary_slip/presentation/pages/salary_slip
 import 'package:myghm_mobile/navigation/shell/app_navigation_shell.dart';
 
 import 'package:myghm_mobile/features/absen/presentation/pages/absen_page.dart';
-import 'package:myghm_mobile/form_page.dart';
-import 'package:myghm_mobile/data_page.dart';
+import 'package:myghm_mobile/features/form/presentation/pages/form_page.dart';
+import 'package:myghm_mobile/features/employe_data/presentation/data_page.dart';
 
 import '../../features/profile/presentation/flow/profile_flow.dart';
 import '../../features/profile/presentation/pages/pp_view_page.dart';

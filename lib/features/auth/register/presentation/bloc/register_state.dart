@@ -9,7 +9,11 @@ class RegisterState with _$RegisterState {
   const factory RegisterState.initial() = _Initial;
   const factory RegisterState.loading() = _Loading;
 
-  const factory RegisterState.success(RegisterResultModel result) = _Success;
+  const factory RegisterState.noInternet() = _NoInternet;
+  const factory RegisterState.serverDown() = _ServerDown;
 
+  const factory RegisterState.dataNotFound() = _DataNotFound;
+
+  const factory RegisterState.success(RegisterResultModel result) = _Success;
   const factory RegisterState.failure(AppException failure) = _Failure;
 }

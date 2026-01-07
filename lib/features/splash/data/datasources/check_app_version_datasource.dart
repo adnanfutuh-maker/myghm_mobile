@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:myghm_mobile/features/splash/data/models/check_app_version_model.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import '../../../../core/env/env.dart';
 import '../../../../core/exceptions/app_exception.dart';
 import '../../../../core/services/http/http_client_service.dart';
@@ -20,9 +21,11 @@ class CheckAppVersionDatasourceImpl implements CheckAppVersionDatasource {
   @override
   Future<CheckAppVersionModel> getAppVersion() async {
     try {
+      final packageInfo = await PackageInfo.fromPlatform();
+      final currentVersion = int.parse(packageInfo.version.split('.').last);
       final response = await httpClientService.post(
         path: '${Env.baseEndpoint}check-version/',
-        data: {'version_id': 16},
+        data: {'version_id': currentVersion},
         options: Options(
           validateStatus: (status) => status != null && status < 500,
         ),

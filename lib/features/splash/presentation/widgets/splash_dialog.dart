@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../../../core/design_system/widgets/custom_dialog.dart';
+import '../../../../core/design_system/widgets/dialogs/custom_dialog.dart';
 import '../bloc/splash_bloc.dart';
 import '../bloc/splash_event.dart';
 

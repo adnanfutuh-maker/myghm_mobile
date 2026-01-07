@@ -5,6 +5,8 @@ import 'package:myghm_mobile/core/design_system/themes/pallet.dart';
 
 import '../../../../../core/design_system/themes/dimension.dart';
 import '../../../../../core/design_system/themes/textstyles.dart';
+import '../../../../../core/design_system/widgets/auth/custom_textfield.dart';
+import '../../../../../core/utils/validator/validation.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,7 +16,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool _isPasswordHidden = true;
+  final _formKey = GlobalKey<FormState>();
+  final _nipController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -61,118 +65,79 @@ class _LoginPageState extends State<LoginPage> {
                 child: SingleChildScrollView(
                   keyboardDismissBehavior:
                       ScrollViewKeyboardDismissBehavior.onDrag,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        "Login",
-                        textAlign: TextAlign.center,
-                        style: TextStyles.textXlBold,
-                      ),
-
-                      SizedBox(height: Dimension.height32),
-
-                      TextField(
-                        decoration: InputDecoration(
-                          labelText: "NIP",
-                          floatingLabelStyle: TextStyle(color: Pallet.black),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(
-                              Dimension.radius16,
-                            ),
-                            borderSide: BorderSide(color: Pallet.black),
-                          ),
-
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(
-                              Dimension.radius16,
-                            ),
-                            borderSide: BorderSide(
-                              color: Pallet.primary,
-                              width: 1.5.w,
-                            ),
-                          ),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          "Login",
+                          textAlign: TextAlign.center,
+                          style: TextStyles.textXlBold,
                         ),
-                      ),
 
-                      SizedBox(height: Dimension.height16),
+                        SizedBox(height: Dimension.height32),
 
-                      TextField(
-                        obscureText: _isPasswordHidden,
-                        decoration: InputDecoration(
-                          labelText: "Password",
-                          floatingLabelStyle: TextStyle(color: Pallet.black),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(
-                              Dimension.radius16,
-                            ),
-                            borderSide: BorderSide(color: Pallet.black),
-                          ),
-
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(
-                              Dimension.radius16,
-                            ),
-                            borderSide: BorderSide(
-                              color: Pallet.primary,
-                              width: 1.5.w,
-                            ),
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              _isPasswordHidden
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              size: Dimension.radius24,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _isPasswordHidden = !_isPasswordHidden;
-                              });
-                            },
-                          ),
+                        CustomTextField(
+                          controller: _nipController,
+                          label: "NIP",
+                          validator: (value) =>
+                              MyValidatior.validateEmptyText("NIP", value),
                         ),
-                      ),
-                      SizedBox(height: Dimension.height8),
 
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Lupa password ?",
-                            style: TextStyle(
-                              fontSize: Dimension.style14,
-                              color: Pallet.primary,
-                            ),
-                          ),
+                        SizedBox(height: Dimension.height16),
+
+                        CustomTextField(
+                          controller: _passwordController,
+                          label: "Password",
+                          isPassword: true,
+                          validator: (value) =>
+                              MyValidatior.validatePassword(value),
                         ),
-                      ),
+                        SizedBox(height: Dimension.height8),
 
-                      SizedBox(height: 24),
-
-                      SizedBox(
-                        height: Dimension.height48,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            context.go("/absen");
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Pallet.primary,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                Dimension.radius12,
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "Lupa password ?",
+                              style: TextStyle(
+                                fontSize: Dimension.style14,
+                                color: Pallet.primary,
                               ),
                             ),
                           ),
-                          child: Text(
-                            "Login",
-                            style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+
+                        SizedBox(height: 24),
+
+                        SizedBox(
+                          height: Dimension.height48,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              context.go("/absen");
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Pallet.primary,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  Dimension.radius12,
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              "Login",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 24),
-                    ],
+                        SizedBox(height: 24),
+                      ],
+                    ),
                   ),
                 ),
               ),
