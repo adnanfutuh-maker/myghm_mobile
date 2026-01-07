@@ -50,4 +50,16 @@ class RegisterDialog {
       },
     );
   }
+
+  static void genericError(BuildContext context, String message) {
+    CustomDialog.show(
+      context,
+      title: 'Terjadi Kesalahan',
+      content: message,
+      icon: Icons.error_outline,
+      color: Colors.purpleAccent,
+      buttonText: 'OK',
+      onPressed: () => Navigator.of(context).pop(),
+    );
+  }
 }

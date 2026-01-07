@@ -60,7 +60,6 @@ import '../../features/splash/domain/usecases/check_internet_usecase.dart'
 import '../../features/splash/domain/usecases/check_location_permission_usecase.dart'
     as _i247;
 import '../../features/splash/presentation/bloc/splash_bloc.dart' as _i442;
-import '../device/camera/camera_device.dart' as _i780;
 import '../device/device_id/device_id.dart' as _i675;
 import '../device/face_detection/face_detection_device.dart' as _i240;
 import '../device/image_picker_device.dart' as _i184;
@@ -91,7 +90,6 @@ _i174.GetIt $initGetIt(
   gh.lazySingleton<_i240.FaceDetectionDevice>(
     () => _i240.FaceDetectionDeviceImpl(),
   );
-  gh.lazySingleton<_i780.CameraDevice>(() => _i780.CameraDeviceImpl());
   gh.factory<_i361.Dio>(() => registerModule.dio(), instanceName: 'base');
   gh.lazySingleton<_i184.ImagePickerDevice>(
     () => _i184.ImagePickerDeviceImpl(),

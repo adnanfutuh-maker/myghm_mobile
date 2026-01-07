@@ -16,7 +16,7 @@ import '../bloc/register_bloc.dart';
 import '../bloc/register_event.dart';
 import '../bloc/register_state.dart';
 import '../../data/models/register_data_model.dart';
-import '../widgets/custom_textfield.dart';
+import '../../../../../core/design_system/widgets/auth/custom_textfield.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -75,12 +75,8 @@ class _RegisterPageState extends State<RegisterPage> {
             serverDown: () => RegisterDialog.serverDown(context),
             dataNotFound: () => RegisterDialog.dataNotFound(context),
             success: (result) => context.go('/login'),
-            failure: (failure) {
-              Navigator.pop(context);
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text(failure.message)));
-            },
+            failure: (failure) =>
+                RegisterDialog.genericError(context, failure.message),
           );
         },
         child: Scaffold(
