@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myghm_mobile/core/design_system/themes/pallet.dart';
+import 'package:myghm_mobile/core/design_system/widgets/appbar/custom_appbar.dart';
 
 import '../../../../../../core/design_system/themes/dimension.dart';
 import '../../../../../../core/design_system/widgets/auth/custom_textfield.dart';
@@ -20,15 +21,12 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: CustomAppbar(
+        title: "Reset Password",
         leading: IconButton(
           icon: Icon(Icons.chevron_left, size: Dimension.radius36),
           onPressed: () => context.pop(),
         ),
-        title: const Text("Reset Password"),
-        backgroundColor: const Color(0xFFFFC107),
-        foregroundColor: Colors.black,
-        elevation: 0,
       ),
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,

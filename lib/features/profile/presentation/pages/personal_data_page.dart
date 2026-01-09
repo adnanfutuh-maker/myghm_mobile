@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/design_system/themes/dimension.dart';
 import '../../../../core/design_system/themes/pallet.dart';
+import '../../../../core/design_system/widgets/appbar/custom_appbar.dart';
 import '../bloc/profile_image_bloc.dart';
 import '../bloc/profile_image_state.dart';
 
@@ -20,15 +21,12 @@ class PersonalDataPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _bgColor,
-      appBar: AppBar(
+      appBar: CustomAppbar(
+        title: "Data Pribadi",
         leading: IconButton(
           icon: Icon(Icons.chevron_left, size: Dimension.radius36),
           onPressed: () => context.pop(),
         ),
-        title: const Text("Data Pribadi"),
-        backgroundColor: const Color(0xFFFFC107),
-        foregroundColor: Colors.black,
-        elevation: 0,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),

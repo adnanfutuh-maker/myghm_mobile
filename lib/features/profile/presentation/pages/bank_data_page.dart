@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myghm_mobile/core/design_system/themes/dimension.dart';
-import 'package:myghm_mobile/core/design_system/themes/pallet.dart';
+
+import '../../../../core/design_system/widgets/appbar/custom_appbar.dart'
+    show CustomAppbar;
 
 class BankDataPage extends StatelessWidget {
   const BankDataPage({super.key});
@@ -13,15 +15,12 @@ class BankDataPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _bgColor,
-      appBar: AppBar(
+      appBar: CustomAppbar(
+        title: "Data Bank",
         leading: IconButton(
           icon: Icon(Icons.chevron_left, size: Dimension.radius36),
           onPressed: () => context.pop(),
         ),
-        title: const Text('Data Bank'),
-        backgroundColor: Pallet.primary,
-        foregroundColor: Colors.black,
-        elevation: 0,
       ),
       body: ListView(
         padding: EdgeInsets.all(Dimension.radius16),

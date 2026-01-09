@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../../core/design_system/themes/dimension.dart';
-import '../../../../core/design_system/themes/pallet.dart';
+import '../../../../core/design_system/widgets/appbar/custom_appbar.dart';
 
 class FamilyDataPage extends StatelessWidget {
   const FamilyDataPage({super.key});
@@ -15,15 +14,12 @@ class FamilyDataPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _bgColor,
-      appBar: AppBar(
+      appBar: CustomAppbar(
+        title: "Data Keluarga",
         leading: IconButton(
           icon: Icon(Icons.chevron_left, size: Dimension.radius36),
           onPressed: () => context.pop(),
         ),
-        title: const Text('Data Keluarga'),
-        backgroundColor: Pallet.primary,
-        foregroundColor: Colors.black,
-        elevation: 0,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),

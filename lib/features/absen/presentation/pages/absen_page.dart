@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:myghm_mobile/features/absen/presentation/widgets/error_dialog.dart';
 
 import '../../../../core/design_system/themes/dimension.dart';
-import '../../../../core/design_system/themes/pallet.dart';
+import '../../../../core/design_system/widgets/appbar/custom_appbar.dart';
 import '../bloc/absen_bloc.dart';
 import '../bloc/absen_event.dart';
 import '../bloc/absen_state.dart';
@@ -19,14 +19,8 @@ class AbsenPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => GetIt.I<AbsenBloc>(),
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Pallet.primary,
-          elevation: 0,
-          title: Text(
-            'MyGHM',
-            style: TextStyle(color: Colors.black, fontSize: Dimension.style22),
-          ),
-        ),
+        backgroundColor: const Color(0xFFF4F6FA),
+        appBar: CustomAppbar(title: "MyGHM"),
         body: BlocListener<AbsenBloc, AbsenState>(
           listener: (context, state) {
             state.maybeWhen(
@@ -56,34 +50,106 @@ class AbsenPage extends StatelessWidget {
 
                 return Column(
                   children: [
-                    Text(
-                      'Aktifitas Terakhir Melakukan Absensi',
-                      style: TextStyle(
-                        fontSize: Dimension.style14,
-                        color: Colors.grey.shade600,
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: Colors.grey.shade400),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.05),
+                            blurRadius: 12,
+                            offset: const Offset(0, 6),
+                          ),
+                        ],
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      'Anda Telah Melakukan Absen Check IN pada :',
-                      style: TextStyle(
-                        fontSize: Dimension.style16,
-                        color: Colors.green,
-                        fontWeight: FontWeight.w500,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Aktivitas Terakhir',
+                            style: TextStyle(
+                              fontSize: Dimension.style14,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+
+                          const SizedBox(height: 12),
+
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.green.withValues(alpha: 0.12),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: const Text(
+                                  'CHECK IN',
+                                  style: TextStyle(
+                                    color: Colors.green,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 12),
+
+                          /// TANGGAL
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.calendar_month_outlined,
+                                size: 18,
+                                color: Colors.grey.shade600,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                '02 January 2026',
+                                style: TextStyle(
+                                  fontSize: Dimension.style14,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.grey.shade800,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 6),
+
+                          /// JAM
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.access_time_rounded,
+                                size: 18,
+                                color: Colors.grey.shade600,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                '07:23:03',
+                                style: TextStyle(
+                                  fontSize: Dimension.style14,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.grey.shade800,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      '02 January 2026 07:23:03',
-                      style: TextStyle(
-                        fontSize: Dimension.style16,
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
+
                     const SizedBox(height: 24),
 
                     /// CARD FOTO

@@ -4,6 +4,8 @@ import 'package:myghm_mobile/core/design_system/themes/pallet.dart';
 import 'package:myghm_mobile/core/design_system/themes/textstyles.dart';
 import 'package:myghm_mobile/features/salary_slip/presentation/widgets/slip_card.dart';
 
+import '../../../../core/design_system/widgets/appbar/custom_appbar.dart';
+
 class SalarySlipPage extends StatelessWidget {
   const SalarySlipPage({super.key});
 
@@ -13,15 +15,7 @@ class SalarySlipPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Pallet.primaryScBg,
-      appBar: AppBar(
-        centerTitle: false,
-        backgroundColor: Pallet.primary,
-        elevation: 0,
-        title: Text(
-          'MyGHM',
-          style: TextStyle(color: Colors.black, fontSize: Dimension.style22),
-        ),
-      ),
+      appBar: CustomAppbar(title: "MyGHM"),
       body: Padding(
         padding: EdgeInsets.all(Dimension.radius16),
         child: Column(

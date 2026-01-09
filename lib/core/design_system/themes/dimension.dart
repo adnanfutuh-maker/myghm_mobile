@@ -184,6 +184,7 @@ class Dimension {
   static double radius12 = 12.r;
   static double radius14 = 14.r;
   static double radius16 = 16.r;
+  static double radius23 = 23.r;
   static double radius24 = 24.r;
   static double radius25 = 25.r;
   static double radius26 = 26.r;

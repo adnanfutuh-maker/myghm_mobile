@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:myghm_mobile/core/design_system/themes/pallet.dart';
 import '../../../core/design_system/themes/dimension.dart';
+import '../../../core/design_system/widgets/appbar/custom_appbar.dart';
 
 enum DataType { absensi, report, lembur, cuti, sakit, izin }
 
@@ -25,35 +27,8 @@ class _DataPageState extends State<DataPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF1F5F9),
-
-      /// ================= APP BAR =================
-      appBar: AppBar(
-        elevation: 0,
-        title: const Text(
-          'MyGHM',
-          style: TextStyle(
-            fontWeight: FontWeight.w700,
-            letterSpacing: 0.4,
-            color: Colors.white,
-          ),
-        ),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(0xFF0F766E), // teal dark
-                Color(0xFF0D9488), // emerald
-                Color(0xFF14B8A6), // tosca
-              ],
-            ),
-          ),
-        ),
-      ),
-
-      /// ================= BODY =================
+      backgroundColor: const Color(0xFFF4F6FA),
+      appBar: CustomAppbar(title: "MyGHM"),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -77,17 +52,12 @@ class _DataPageState extends State<DataPage> {
             const SizedBox(height: 4),
             const Text(
               'Data hanya tersedia 3 bulan terakhir',
-              style: TextStyle(fontSize: 14, color: Color(0xFF64748B)),
+              style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
 
             const SizedBox(height: 20),
 
-            Expanded(
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                child: _buildContent(),
-              ),
-            ),
+            Expanded(child: _buildContent()),
           ],
         ),
       ),
@@ -97,7 +67,6 @@ class _DataPageState extends State<DataPage> {
   Widget _buildContent() {
     if (_selected == DataType.absensi || _selected == DataType.lembur) {
       return ListView(
-        key: ValueKey(_selected),
         children: const [
           DataCard(title: 'Januari 2026'),
           SizedBox(height: 12),
@@ -109,12 +78,15 @@ class _DataPageState extends State<DataPage> {
     }
 
     return const Center(
-      child: Text('Belum ada data', style: TextStyle(color: Color(0xFF64748B))),
+      child: Text(
+        'Belum ada data',
+        style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600),
+      ),
     );
   }
 }
 
-/// ================= SEGMENTED =================
+/// ================= SEGMENTED CONTROL =================
 class _SegmentedControl extends StatelessWidget {
   final DataType selected;
   final ValueChanged<DataType> onChanged;
@@ -145,33 +117,24 @@ class _SegmentedControl extends StatelessWidget {
           return GestureDetector(
             onTap: () => onChanged(type),
             child: AnimatedContainer(
-              duration: const Duration(milliseconds: 220),
+              duration: const Duration(milliseconds: 200),
               padding: const EdgeInsets.symmetric(horizontal: 18),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: active ? const Color(0xFF14B8A6) : Colors.white,
+                color: active
+                    ? Pallet.primary.withValues(alpha: 0.12)
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(22),
                 border: Border.all(
-                  color: active
-                      ? const Color(0xFF0D9488)
-                      : const Color(0xFFE2E8F0),
+                  color: active ? Pallet.primary : const Color(0xFFE5E7EB),
                 ),
-                boxShadow: active
-                    ? [
-                        BoxShadow(
-                          color: const Color(0xFF14B8A6).withOpacity(0.35),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
-                        ),
-                      ]
-                    : [],
               ),
               child: Text(
                 labels[type]!,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: active ? Colors.white : const Color(0xFF64748B),
+                  color: active ? Pallet.primary : const Color(0xFF64748B),
                 ),
               ),
             ),
@@ -182,7 +145,7 @@ class _SegmentedControl extends StatelessWidget {
   }
 }
 
-/// ================= CARD =================
+/// ================= DATA CARD =================
 class DataCard extends StatelessWidget {
   final String title;
 
@@ -195,12 +158,12 @@ class DataCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(Dimension.radius16),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
-        boxShadow: const [
+        border: Border.all(color: Colors.grey.withValues(alpha: 0.35)),
+        boxShadow: [
           BoxShadow(
-            color: Color(0x14000000),
-            blurRadius: 16,
-            offset: Offset(0, 8),
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -210,12 +173,13 @@ class DataCard extends StatelessWidget {
             width: Dimension.width44,
             height: Dimension.height44,
             decoration: BoxDecoration(
-              color: const Color(0xFF14B8A6).withOpacity(0.15),
+              color: Pallet.primary.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(Dimension.radius12),
             ),
-            child: const Icon(
-              Icons.calendar_month_rounded,
-              color: Color(0xFF0D9488),
+            child: Icon(
+              Icons.calendar_month_outlined,
+              color: Pallet.primary,
+              size: Dimension.radius28,
             ),
           ),
           SizedBox(width: Dimension.width12),
@@ -238,10 +202,10 @@ class DataCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(Dimension.radius16),
               onTap: () {},
               child: Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: Icon(
                   Icons.download_rounded,
-                  color: Colors.grey,
+                  color: Pallet.grey,
                   size: Dimension.radius28,
                 ),
               ),
